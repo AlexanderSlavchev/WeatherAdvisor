@@ -1,4 +1,4 @@
-package com.example.weatheradvisor.repositories;
+package com.example.weatheradvisor.data.local;
 
 import androidx.room.Dao;
 import androidx.room.Insert;

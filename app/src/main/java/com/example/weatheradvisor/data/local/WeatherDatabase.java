@@ -1,4 +1,4 @@
-package com.example.weatheradvisor.repositories;
+package com.example.weatheradvisor.data.local;
 
 import android.content.Context;
 
@@ -6,7 +6,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {WeatherData.class}, version = 1)
+@Database(entities = {WeatherData.class}, version = 1 , exportSchema = false)
 public abstract class WeatherDatabase extends RoomDatabase {
     public abstract WeatherDao weatherDao();
 

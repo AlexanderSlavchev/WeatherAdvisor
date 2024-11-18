@@ -15,9 +15,10 @@
 //
 //import com.example.weatheradvisor.fragments.MapFragment;
 //import com.example.weatheradvisor.fragments.WeatherFragment;
+//import com.example.weatheradvisor.ui.screens.MainScreenKt;
 //import com.google.android.material.bottomnavigation.BottomNavigationView;
 //
-//public class com.example.weatheradvisor.MainActivity extends AppCompatActivity {
+//public class MainActivity extends AppCompatActivity {
 //    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
 //
 //    @Override
