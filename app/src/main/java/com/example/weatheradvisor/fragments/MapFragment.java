@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.weatheradvisor.R;
@@ -20,29 +22,34 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private GoogleMap googleMap;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_map, container, false);
-
-        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
-
-        return view;
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_map, container, false);
     }
 
     @Override
-    public void onMapReady(GoogleMap map) {
-        googleMap = map;
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
+                .findFragmentById(R.id.map);
+
+        if (mapFragment != null) {
+            mapFragment.getMapAsync(this);
+        }
+    }
+
+    @Override
+    public void onMapReady(@NonNull GoogleMap map) {
+        this.googleMap = map;
         updateLocationOnMap();
     }
 
     private void updateLocationOnMap() {
-        LocationHelper locationHelper = new LocationHelper(requireContext());
-        locationHelper.getLastLocation(location -> {
+        new LocationHelper(requireContext()).getLastLocation(location -> {
             if (location != null && googleMap != null) {
                 LatLng currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
                 googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 15));
-                googleMap.addMarker(new MarkerOptions().position(currentLocation).title("Your Location"));
+                googleMap.addMarker(new MarkerOptions().position(currentLocation).title(getString(R.string.app_name)));
             }
         });
     }

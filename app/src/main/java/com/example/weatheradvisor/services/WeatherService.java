@@ -1,4 +1,4 @@
-package com.example.weatheradvisor;
+package com.example.weatheradvisor.services;
 
 import com.example.weatheradvisor.models.WeatherResponse;
 
